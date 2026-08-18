@@ -1,0 +1,14 @@
+{
+  "brisa": {
+    "title": "@A-Brisa",
+    "description": "Digitalización de la captura de datos de tickets de merma, ahorrando horas de captura manual por semana para los encargados de tienda."
+  },
+  "renata": {
+    "title": "@A-Renata",
+    "description": "Reduce significativamente el tiempo que el equipo de reclutamiento dedicaría a la recopilación inicial de datos y a las explicaciones repetitivas de las vacantes. Minimiza la entrada manual de información inicial y la gestión de la comunicación básica con un gran volumen de candidatos."
+  },
+  "victoria": {
+    "title": "@A-Victoria",
+    "description": "El usuario solo envía fotos y confirma, Victoria hace el resto del trabajo pesado de validación y registro. Agilidad en Sucursal: El desbloqueo es prácticamente instantáneo, permitiendo que la operación de la tienda no se detenga. Eficiencia en Tiempos y personal: Reduce el costo operativo derivado del tiempo que el personal dedicaba anteriormente a gestionar estos permisos de forma manual."
+  }
+}

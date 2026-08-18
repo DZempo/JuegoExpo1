@@ -1,0 +1,29 @@
+[
+  {
+    "id": "brisa",
+    "name": "Brisa",
+    "role": "Operaciones e Inventarios",
+    "colorHex": "#1e3a8a",
+    "image": "/assets/brisa/A-Brisa.png",
+    "musicSrc": "/assets/audio/brisa/music.mp3",
+    "resultsVideoSrc": "/assets/video/brisa/results.mp4"
+  },
+  {
+    "id": "renata",
+    "name": "Renata",
+    "role": "Recursos Humanos",
+    "colorHex": "#1e40af",
+    "image": "/assets/renata/A-Renata.png",
+    "musicSrc": "/assets/audio/renata/music.mp3",
+    "resultsVideoSrc": "/assets/video/renata/results.mp4"
+  },
+  {
+    "id": "victoria",
+    "name": "Victoria",
+    "role": "Aseguramiento de Ingresos y Operaciones]",
+    "colorHex": "#172554",
+    "image": "/assets/victoria/A-Victoria.png",
+    "musicSrc": "/assets/audio/victoria/music.mp3",
+    "resultsVideoSrc": "/assets/video/victoria/results.mp4"
+  }
+]
