@@ -76,6 +76,14 @@ export function useGameEngine({ characterId, onFinish }: UseGameEngineOptions): 
     setAiScore(liveAiScore);
   }, [liveAiScore, setAiScore]);
 
+  // Beep de cuenta regresiva en los últimos TIMER_DANGER_THRESHOLD segundos (uno por tick).
+  useEffect(() => {
+    if (timer.isPulsing) {
+      playSfx('timer');
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [timer.secondsLeft]);
+
   const registerAnswer = useCallback(
     (isCorrect: boolean) => {
       if (isCorrect) {

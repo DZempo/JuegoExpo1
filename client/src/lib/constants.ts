@@ -1,5 +1,9 @@
 import { CharacterId } from '@/types/character.types';
 
+// Música de fondo (portada/final + música por personaje durante el minijuego). Cambiar a
+// true para reactivarla — los efectos de sonido (correcto/incorrecto/timer) no dependen de esto.
+export const ENABLE_BACKGROUND_MUSIC = false;
+
 export const GAME_DURATION_SECONDS = 30;
 export const TIMER_WARNING_THRESHOLD = 15; // <=15s -> amarillo
 export const TIMER_DANGER_THRESHOLD = 10; // <=10s -> rojo + pulse
