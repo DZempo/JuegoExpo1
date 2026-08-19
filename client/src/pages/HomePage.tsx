@@ -41,7 +41,7 @@ export function HomePage() {
       <VideoPlaceholder src="/assets/video/portada.mp4" className="absolute inset-0 w-full h-full opacity-30" />
       <div className="absolute inset-0 bg-navy-950/60" />
 
-      <div className="relative flex-1 flex flex-col items-center justify-center gap-6 lg:gap-10 px-6 text-center">
+      <div className="relative flex-1 flex flex-col items-center justify-center gap-10 lg:gap-16 px-6 text-center">
         <div className="flex flex-col gap-2">
           <h1 className="text-2xl lg:text-4xl font-extrabold">Sé una IA por un día</h1>
           <p className="text-white/60 lg:text-lg">Selecciona tu personaje</p>

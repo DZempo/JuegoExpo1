@@ -16,26 +16,18 @@ body {
   color: white;
 }
 
-/* #root (no body) es el padre directo de .app-shell, así que es quien debe centrarlo
-   verticalmente cuando el alto del viewport supera el max-height del shell. */
-#root {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* Aplicación pensada exclusivamente para orientación horizontal.
-   max-height cubre desde un teléfono ancho hasta una pantalla táctil horizontal
-   de hasta 1920x1080 (kiosco/totem) sin quedar como una franja angosta perdida
+/* Aplicación pensada exclusivamente para orientación vertical.
+   max-width cubre desde un teléfono angosto hasta una pantalla táctil vertical
+   de hasta 1080x1920 (kiosco/totem) sin quedar como una columna angosta perdida
    en medio de una pantalla grande. */
 .app-shell {
-  /* Ancho fijo (no min-width): así los hijos flex-1 con overflow-y-auto (p. ej. el chat
+  /* Alto fijo (no min-height): así los hijos flex-1 con overflow-y-auto (p. ej. el chat
      de Brisa) realmente se recortan y hacen scroll interno, en vez de estirar toda la
-     página hacia el costado. */
-  width: 100dvw;
-  height: 100%;
-  max-height: 1080px;
-  margin: 0;
+     página hacia abajo. */
+  height: 100dvh;
+  width: 100%;
+  max-width: 1080px;
+  margin: 0 auto;
   position: relative;
   overflow: hidden;
   display: flex;
@@ -47,7 +39,7 @@ body {
   display: none;
 }
 
-@media (orientation: portrait) and (max-width: 500px) {
+@media (orientation: landscape) and (max-height: 500px) {
   .app-shell {
     display: none;
   }

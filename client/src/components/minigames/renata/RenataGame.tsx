@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { Button } from '@/components/common/Button';
-import { GameSidebar } from '@/components/common/GameSidebar';
 import { NotificationBubble } from '@/components/common/NotificationBubble';
+import { ScoreBoard } from '@/components/common/ScoreBoard';
+import { Timer } from '@/components/common/Timer';
 import applicants from '@/data/renata/applicants.json';
 import { useGameEngine } from '@/hooks/useGameEngine';
 import { GAME_DURATION_SECONDS } from '@/lib/constants';
@@ -43,19 +44,20 @@ export function RenataGame({ onFinish }: RenataGameProps) {
   }
 
   return (
-    <div className="relative flex flex-1 min-h-0 px-4 lg:px-8 py-4 lg:py-8 gap-4 lg:gap-6">
+    <div className="relative flex flex-col flex-1 px-4 lg:px-8 pb-4 lg:pb-8 gap-4 lg:gap-6">
       <NotificationBubble kind={engine.activeNotification} />
 
-      <GameSidebar
-        playerScore={engine.playerScore}
-        aiScore={engine.aiScore}
-        secondsLeft={engine.secondsLeft}
-        durationSeconds={GAME_DURATION_SECONDS}
-        colorPhase={engine.colorPhase}
-        isPulsing={engine.isPulsing}
-      />
+      <div className="pt-4 lg:pt-8 flex flex-col gap-3 lg:gap-4 max-w-2xl w-full mx-auto">
+        <ScoreBoard playerScore={engine.playerScore} aiScore={engine.aiScore} />
+        <Timer
+          secondsLeft={engine.secondsLeft}
+          durationSeconds={GAME_DURATION_SECONDS}
+          colorPhase={engine.colorPhase}
+          isPulsing={engine.isPulsing}
+        />
+      </div>
 
-      <div className="relative flex-1 grid grid-cols-4 grid-rows-1 gap-3 lg:gap-6">
+      <div className="relative flex-1 grid grid-cols-2 grid-rows-2 gap-3 lg:gap-6 max-w-3xl w-full mx-auto">
         <DropZone department="Sistemas" onDropApplicant={handleDrop} />
         <DropZone department="Marketing" onDropApplicant={handleDrop} />
         <DropZone department="Contabilidad" onDropApplicant={handleDrop} />

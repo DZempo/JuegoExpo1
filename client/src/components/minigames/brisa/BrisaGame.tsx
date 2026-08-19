@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import { Button } from '@/components/common/Button';
-import { GameSidebar } from '@/components/common/GameSidebar';
 import { NotificationBubble } from '@/components/common/NotificationBubble';
+import { ScoreBoard } from '@/components/common/ScoreBoard';
+import { Timer } from '@/components/common/Timer';
 import { useGameEngine } from '@/hooks/useGameEngine';
 import claims from '@/data/brisa/claims.json';
 import { GAME_DURATION_SECONDS } from '@/lib/constants';
@@ -65,45 +66,44 @@ export function BrisaGame({ onFinish }: BrisaGameProps) {
   }
 
   return (
-    <div className="relative flex flex-1 min-h-0 px-4 lg:px-8 py-4 lg:py-8 gap-4 lg:gap-6">
+    <div className="relative flex flex-col flex-1 min-h-0 px-4 lg:px-8 pb-4 lg:pb-8 gap-4 lg:gap-6">
       <NotificationBubble kind={engine.activeNotification} />
 
-      <GameSidebar
-        playerScore={engine.playerScore}
-        aiScore={engine.aiScore}
-        secondsLeft={engine.secondsLeft}
-        durationSeconds={GAME_DURATION_SECONDS}
-        colorPhase={engine.colorPhase}
-        isPulsing={engine.isPulsing}
-      />
+      <div className="pt-4 lg:pt-8 flex flex-col gap-3 lg:gap-4 max-w-2xl w-full mx-auto">
+        <ScoreBoard playerScore={engine.playerScore} aiScore={engine.aiScore} />
+        <Timer
+          secondsLeft={engine.secondsLeft}
+          durationSeconds={GAME_DURATION_SECONDS}
+          colorPhase={engine.colorPhase}
+          isPulsing={engine.isPulsing}
+        />
+      </div>
 
-      <div className="flex-1 min-h-0 flex flex-col gap-3 lg:gap-4">
-        <div className="flex-1 min-h-0 flex flex-col gap-3 overflow-y-auto bg-navy-900/60 rounded-2xl p-3 lg:p-6 border border-white/10">
-          {rounds.map((round, index) => (
-            <div key={index} className="flex flex-col gap-3">
-              <ChatBubble claimId={round.claim.id} image={round.claim.image} description={round.claim.description} />
-              {round.playerAnswer && <BrisaReplyBubble answer={round.playerAnswer} />}
-            </div>
-          ))}
-          <div ref={bottomRef} />
-        </div>
+      <div className="flex-1 min-h-0 flex flex-col gap-3 overflow-y-auto bg-navy-900/60 rounded-2xl p-3 lg:p-6 border border-white/10 max-w-2xl w-full mx-auto">
+        {rounds.map((round, index) => (
+          <div key={index} className="flex flex-col gap-3">
+            <ChatBubble claimId={round.claim.id} image={round.claim.image} description={round.claim.description} />
+            {round.playerAnswer && <BrisaReplyBubble answer={round.playerAnswer} />}
+          </div>
+        ))}
+        <div ref={bottomRef} />
+      </div>
 
-        <div className="grid grid-cols-2 gap-3 lg:gap-4">
-          <Button
-            variant="secondary"
-            className="border-success text-success touch-manipulation"
-            onClick={() => handleAnswer('correcto')}
-          >
-            Reclamación válida
-          </Button>
-          <Button
-            variant="secondary"
-            className="border-danger text-danger touch-manipulation"
-            onClick={() => handleAnswer('incorrecto')}
-          >
-            Reclamación inválida
-          </Button>
-        </div>
+      <div className="grid grid-cols-2 gap-3 lg:gap-4 max-w-2xl w-full mx-auto">
+        <Button
+          variant="secondary"
+          className="border-success text-success touch-manipulation"
+          onClick={() => handleAnswer('correcto')}
+        >
+          Reclamación válida
+        </Button>
+        <Button
+          variant="secondary"
+          className="border-danger text-danger touch-manipulation"
+          onClick={() => handleAnswer('incorrecto')}
+        >
+          Reclamación inválida
+        </Button>
       </div>
     </div>
   );
