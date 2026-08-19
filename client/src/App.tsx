@@ -1,7 +1,7 @@
 import { DndProvider } from 'react-dnd';
 import { TouchBackend } from 'react-dnd-touch-backend';
 import { BrowserRouter } from 'react-router-dom';
-import { MobileFrame } from '@/components/layout/MobileFrame';
+import { AppFrame } from '@/components/layout/AppFrame';
 import { AudioProvider } from '@/context/AudioContext';
 import { GameProvider } from '@/context/GameContext';
 import { AppRouter } from '@/router/AppRouter';
@@ -16,9 +16,9 @@ export function App() {
       <GameProvider>
         <AudioProvider>
           <DndProvider backend={TouchBackend} options={DND_BACKEND_OPTIONS}>
-            <MobileFrame>
+            <AppFrame>
               <AppRouter />
-            </MobileFrame>
+            </AppFrame>
           </DndProvider>
         </AudioProvider>
       </GameProvider>

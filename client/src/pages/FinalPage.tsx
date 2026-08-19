@@ -42,17 +42,19 @@ export function FinalPage() {
       <VideoPlaceholder src="/assets/video/final.mp4" className="absolute inset-0 w-full h-full" muted={false} />
       <div className="absolute inset-0 bg-navy-950/70" />
 
-      <div className="relative flex-1 flex flex-col items-center justify-center gap-6 lg:gap-10 px-6 text-center">
-        <ImagePlaceholder
-          label={character.name}
-          colorHex={character.colorHex}
-          imageSrc={character.image}
-          className="w-48 lg:w-64 aspect-[2/3]"
-        />
+      <div className="relative flex-1 flex flex-col items-center justify-center gap-4 lg:gap-6 px-6 lg:px-16 text-center">
+        <div className="flex flex-row items-center gap-8 lg:gap-16">
+          <ImagePlaceholder
+            label={character.name}
+            colorHex={character.colorHex}
+            imageSrc={character.image}
+            className="h-56 lg:h-80 aspect-[2/3] shrink-0"
+          />
 
-        <div className="flex flex-col gap-2 max-w-xs lg:max-w-md">
-          <h2 className="text-xl lg:text-3xl font-bold">{finalText?.title ?? 'Cargando texto final...'}</h2>
-          <p className="text-white/70 lg:text-lg">{finalText?.description ?? ''}</p>
+          <div className="flex flex-col gap-2 max-w-md lg:max-w-lg text-left">
+            <h2 className="text-xl lg:text-3xl font-bold">{finalText?.title ?? 'Cargando texto final...'}</h2>
+            <p className="text-white/70 lg:text-lg">{finalText?.description ?? ''}</p>
+          </div>
         </div>
 
         <p className="text-xs lg:text-sm text-white/40">Reinicio automático en {secondsLeft}s</p>

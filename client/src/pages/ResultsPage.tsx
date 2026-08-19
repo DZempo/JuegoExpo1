@@ -34,7 +34,7 @@ export function ResultsPage() {
       <VideoPlaceholder src={character.resultsVideoSrc} className="absolute inset-0 w-full h-full" muted={false} />
       <div className="absolute inset-0 bg-navy-950/70" />
 
-      <div className="relative flex-1 flex flex-col items-center justify-center gap-8 lg:gap-12 px-6 text-center">
+      <div className="relative flex-1 flex flex-col items-center justify-center gap-5 lg:gap-8 px-6 text-center">
         <h1 className="text-2xl lg:text-4xl font-extrabold">Resultados</h1>
 
         <div className="w-full max-w-md">

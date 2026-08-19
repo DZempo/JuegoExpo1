@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import { Button } from '@/components/common/Button';
+import { GameSidebar } from '@/components/common/GameSidebar';
 import { NotificationBubble } from '@/components/common/NotificationBubble';
-import { ScoreBoard } from '@/components/common/ScoreBoard';
-import { Timer } from '@/components/common/Timer';
 import boxes from '@/data/victoria/boxes.json';
 import { useGameEngine } from '@/hooks/useGameEngine';
 import { GAME_DURATION_SECONDS } from '@/lib/constants';
@@ -44,27 +43,26 @@ export function VictoriaGame({ onFinish }: VictoriaGameProps) {
   }
 
   return (
-    <div className="relative flex flex-col flex-1 px-4 lg:px-8 pb-4 lg:pb-8 gap-4 lg:gap-6">
+    <div className="relative flex flex-1 min-h-0 px-4 lg:px-8 py-4 lg:py-8 gap-4 lg:gap-6">
       <NotificationBubble kind={engine.activeNotification} />
 
-      <div className="pt-4 lg:pt-8 flex flex-col gap-3 lg:gap-4 max-w-2xl w-full mx-auto">
-        <ScoreBoard playerScore={engine.playerScore} aiScore={engine.aiScore} />
-        <Timer
-          secondsLeft={engine.secondsLeft}
-          durationSeconds={GAME_DURATION_SECONDS}
-          colorPhase={engine.colorPhase}
-          isPulsing={engine.isPulsing}
-        />
-      </div>
+      <GameSidebar
+        playerScore={engine.playerScore}
+        aiScore={engine.aiScore}
+        secondsLeft={engine.secondsLeft}
+        durationSeconds={GAME_DURATION_SECONDS}
+        colorPhase={engine.colorPhase}
+        isPulsing={engine.isPulsing}
+      />
 
-      <div className="flex-1 flex flex-col justify-between gap-4 lg:gap-6 max-w-2xl w-full mx-auto">
-        <LockZone kind="unlock" className="h-24 lg:h-36" onDropBox={handleDrop} />
+      <div className="flex-1 flex flex-row items-stretch justify-between gap-4 lg:gap-6">
+        <LockZone kind="unlock" className="w-32 lg:w-48" onDropBox={handleDrop} />
 
         <div className="flex-1 flex items-center justify-center">
           <DraggableBox key={currentBox.id} box={currentBox} />
         </div>
 
-        <LockZone kind="lock" className="h-24 lg:h-36" onDropBox={handleDrop} />
+        <LockZone kind="lock" className="w-32 lg:w-48" onDropBox={handleDrop} />
       </div>
     </div>
   );
