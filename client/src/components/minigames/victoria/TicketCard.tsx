@@ -1,3 +1,4 @@
+import { NETO_LOGO_SRC } from '@/lib/assets';
 import { BoxItem } from '@/types/game.types';
 
 interface TicketCardProps {
@@ -23,7 +24,7 @@ export function TicketCard({ ticket }: TicketCardProps) {
     >
       <div className="flex flex-col items-center mb-2 lg:mb-4">
         <div className="w-[52px] h-[52px] lg:w-[84px] lg:h-[84px] rounded-full bg-navy-800 flex items-center justify-center mb-1.5 lg:mb-2.5">
-          <img src="/assets/victoria/Neto-Blanco.png" alt="neto" className="w-8 h-8 lg:w-14 lg:h-14 object-contain" />
+          <img src={NETO_LOGO_SRC} alt="neto" className="w-8 h-8 lg:w-14 lg:h-14 object-contain" />
         </div>
         <div className="font-sans font-extrabold text-[13px] lg:text-[21px] tracking-wide text-navy-800">neto</div>
         <div className="text-[8.5px] lg:text-[13px] tracking-[0.16em] text-[#6b6a63] uppercase">

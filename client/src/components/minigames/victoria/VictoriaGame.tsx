@@ -8,10 +8,12 @@ import { useGameEngine } from '@/hooks/useGameEngine';
 import { GAME_DURATION_SECONDS } from '@/lib/constants';
 import { pickRandomIndex } from '@/lib/random';
 import { BoxItem } from '@/types/game.types';
-import { DraggableBox } from './DraggableBox';
-import { LockZone } from './LockZone';
+import { LockZone, LockZoneKind } from './LockZone';
+import { TicketCard } from './TicketCard';
 
 const BOXES = boxes as BoxItem[];
+
+const UNLOCK_THRESHOLD = 5000;
 
 interface VictoriaGameProps {
   onFinish: () => void;
@@ -29,7 +31,11 @@ export function VictoriaGame({ onFinish }: VictoriaGameProps) {
     engine.start();
   }
 
-  function handleDrop(isCorrect: boolean) {
+  function handleSelectZone(kind: LockZoneKind) {
+    // Un monto ilegible/en blanco no tiene zona correcta: siempre cuenta como incorrecto.
+    const isCorrect =
+      currentBox.amount === null ? false : kind === 'unlock' ? currentBox.amount > UNLOCK_THRESHOLD : currentBox.amount <= UNLOCK_THRESHOLD;
+
     engine.registerAnswer(isCorrect);
     setBoxIndex((prev) => pickRandomIndex(BOXES.length, prev));
   }
@@ -38,6 +44,7 @@ export function VictoriaGame({ onFinish }: VictoriaGameProps) {
     return (
       <div className="flex flex-col items-center justify-center gap-6 lg:gap-8 flex-1 px-6 text-center">
         <p className="text-lg lg:text-2xl font-semibold">Desbloquea las cajas con un monto mayor a $5000</p>
+        <p className="text-white/60 lg:text-lg">Presiona el área que corresponda a cada ticket</p>
         <Button onClick={handleStart}>Comenzar</Button>
       </div>
     );
@@ -58,13 +65,13 @@ export function VictoriaGame({ onFinish }: VictoriaGameProps) {
       </div>
 
       <div className="flex-1 flex flex-col justify-between gap-4 lg:gap-6 max-w-2xl w-full mx-auto">
-        <LockZone kind="unlock" className="h-24 lg:h-36" onDropBox={handleDrop} />
+        <LockZone kind="unlock" className="h-20 lg:h-28" onSelect={handleSelectZone} />
 
         <div className="flex-1 flex items-center justify-center">
-          <DraggableBox key={currentBox.id} box={currentBox} />
+          <TicketCard key={currentBox.id} ticket={currentBox} />
         </div>
 
-        <LockZone kind="lock" className="h-24 lg:h-36" onDropBox={handleDrop} />
+        <LockZone kind="lock" className="h-20 lg:h-28" onSelect={handleSelectZone} />
       </div>
     </div>
   );

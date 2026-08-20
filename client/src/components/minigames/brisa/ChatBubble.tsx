@@ -1,17 +1,11 @@
 import { motion } from 'framer-motion';
 import { ImagePlaceholder } from '@/components/common/ImagePlaceholder';
+import { resolveClaimImageSrc } from '@/lib/assets';
 
 interface ChatBubbleProps {
   claimId: string;
   image: string;
   description: string;
-}
-
-const BRISA_ASSETS_BASE = '/assets/brisa/';
-
-/** claims.json guarda solo el nombre de archivo (p. ej. "img002.jpeg"); aquí se arma la ruta pública real. */
-function resolveClaimImageSrc(image: string): string {
-  return image.startsWith('/') || image.startsWith('http') ? image : `${BRISA_ASSETS_BASE}${image}`;
 }
 
 /** Mensaje entrante del chat: imagen de la reclamación + descripción del empleado. */

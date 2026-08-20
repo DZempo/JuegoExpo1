@@ -7,11 +7,13 @@ import applicants from '@/data/renata/applicants.json';
 import { useGameEngine } from '@/hooks/useGameEngine';
 import { GAME_DURATION_SECONDS } from '@/lib/constants';
 import { pickRandomIndex } from '@/lib/random';
-import { ApplicantItem } from '@/types/game.types';
-import { DraggableApplicant } from './DraggableApplicant';
-import { DropZone } from './DropZone';
+import { ApplicantDepartment, ApplicantItem } from '@/types/game.types';
+import { ApplicantCard } from './ApplicantCard';
+import { DepartmentZone } from './DepartmentZone';
 
 const APPLICANTS = applicants as ApplicantItem[];
+
+const DEPARTMENTS: ApplicantDepartment[] = ['Sistemas', 'Marketing', 'Contabilidad', 'Tienda'];
 
 interface RenataGameProps {
   onFinish: () => void;
@@ -29,8 +31,8 @@ export function RenataGame({ onFinish }: RenataGameProps) {
     engine.start();
   }
 
-  function handleDrop(isCorrect: boolean) {
-    engine.registerAnswer(isCorrect);
+  function handleSelectDepartment(department: ApplicantDepartment) {
+    engine.registerAnswer(department === currentApplicant.department);
     setApplicantIndex((prev) => pickRandomIndex(APPLICANTS.length, prev));
   }
 
@@ -38,6 +40,7 @@ export function RenataGame({ onFinish }: RenataGameProps) {
     return (
       <div className="flex flex-col items-center justify-center gap-6 lg:gap-8 flex-1 px-6 text-center">
         <p className="text-lg lg:text-2xl font-semibold">Organiza a los postulantes lo más rápido que puedas</p>
+        <p className="text-white/60 lg:text-lg">Presiona el área a la que pertenece cada postulante</p>
         <Button onClick={handleStart}>Comenzar</Button>
       </div>
     );
@@ -57,17 +60,19 @@ export function RenataGame({ onFinish }: RenataGameProps) {
         />
       </div>
 
-      <div className="relative flex-1 grid grid-cols-2 grid-rows-2 gap-3 lg:gap-6 max-w-3xl w-full mx-auto">
-        <DropZone department="Sistemas" onDropApplicant={handleDrop} />
-        <DropZone department="Marketing" onDropApplicant={handleDrop} />
-        <DropZone department="Contabilidad" onDropApplicant={handleDrop} />
-        <DropZone department="Tienda" onDropApplicant={handleDrop} />
+      <div className="flex-1 flex items-center justify-center max-w-3xl w-full mx-auto">
+        <ApplicantCard key={currentApplicant.id} applicant={currentApplicant} />
+      </div>
 
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-          <div className="pointer-events-auto">
-            <DraggableApplicant key={currentApplicant.id} applicant={currentApplicant} />
-          </div>
-        </div>
+      <div className="grid grid-cols-2 gap-3 lg:gap-6 max-w-3xl w-full mx-auto">
+        {DEPARTMENTS.map((department) => (
+          <DepartmentZone
+            key={department}
+            department={department}
+            className="h-20 lg:h-28"
+            onSelect={handleSelectDepartment}
+          />
+        ))}
       </div>
     </div>
   );
